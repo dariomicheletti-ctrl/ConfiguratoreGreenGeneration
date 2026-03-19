@@ -63,7 +63,6 @@
         .content {
             padding: 32px;
         }
-        /* Istruzioni */
         .instructions {
             background: #dff0fa;
             border-left: 6px solid #0b3954;
@@ -272,7 +271,6 @@
 <body>
 <div class="card">
     <div class="header">
-        <!-- Logo testuale moderno -->
         <div class="logo">
             <strong>e_GO'</strong> corrente in movimento
         </div>
@@ -280,7 +278,6 @@
         <p>Costo materia prima casa, costo EV separato, beneficio %. Inflazione per VAN.</p>
     </div>
     <div class="content">
-        <!-- Istruzioni per la compilazione -->
         <div class="instructions">
             <h3>📝 Come compilare il modulo</h3>
             <ul>
@@ -291,7 +288,6 @@
             </ul>
         </div>
 
-        <!-- Dati principali -->
         <div class="grid-2">
             <div>
                 <div class="input-group">
@@ -358,7 +354,6 @@
             </div>
         </div>
 
-        <!-- Sezione parametri personalizzabili -->
         <div class="param-section">
             <h3>🔧 Parametri economici e tecnici (modificabili)</h3>
             <div class="param-grid">
@@ -423,7 +418,6 @@
                     </div>
                     <div class="inline-hint">Default 20%</div>
                 </div>
-                <!-- Inflazione annua % -->
                 <div class="input-group">
                     <label>📈 Inflazione annua %</label>
                     <div class="input-wrapper">
@@ -437,11 +431,9 @@
 
         <div class="separator"></div>
 
-        <!-- Risultati -->
         <div class="results">
             <h2>📋 Proposta di investimento <span>simulazione</span></h2>
             <div id="risultatiDinamici">
-                <!-- Sezione tecnica -->
                 <div class="result-row">
                     <span class="result-label">🌞 Produzione solare attesa</span>
                     <span class="result-value" id="prodSolare">-- kWh</span>
@@ -459,7 +451,6 @@
                     <span class="result-value" id="consumoTotale">-- kWh</span>
                 </div>
 
-                <!-- INVESTIMENTO FOTOVOLTAICO (CAPITALE) -->
                 <div class="section-header">🏦 INVESTIMENTO FOTOVOLTAICO</div>
                 <div class="result-row">
                     <span class="result-label">🔆 Costo impianto FV</span>
@@ -470,7 +461,6 @@
                     <span class="result-value" id="valoreResiduoInvestimento">-- €</span>
                 </div>
 
-                <!-- CONTRATTO AUTO SENZA RISCATTO -->
                 <div class="section-header">🚗 CONTRATTO AUTO SENZA RISCATTO</div>
                 <div class="result-row">
                     <span class="result-label">Anticipo auto</span>
@@ -481,7 +471,6 @@
                     <span class="result-value" id="totaleRateAuto">-- €</span>
                 </div>
 
-                <!-- CONTO ECONOMICO ANNUALE -->
                 <div class="section-header">📊 CONTO ECONOMICO ANNUALE</div>
                 <div class="result-row">
                     <span class="result-label">📄 Bolletta totale attuale (casa)</span>
@@ -521,7 +510,6 @@
                     <span class="result-value" style="background: #0b3954; color: white; font-size: 1.3rem;" id="risparmioOperativo">-- €</span>
                 </div>
 
-                <!-- RIEPILOGO REDDITIVITÀ FV -->
                 <div class="section-header">📈 RIENTRO INVESTIMENTO FV</div>
                 <div class="result-row">
                     <span class="result-label">🏦 Investimento FV</span>
@@ -544,7 +532,6 @@
                     <span class="result-value" id="risparmioCarburante">-- €/anno</span>
                 </div>
 
-                <!-- FLUSSO DI CASSA 20 ANNI (con VAN) -->
                 <div class="section-header">📈 FLUSSO DI CASSA PREVISIONALE 20 ANNI</div>
                 <div class="result-row">
                     <span class="result-label">💰 Risparmio annuo (costante)</span>
@@ -578,11 +565,9 @@
                 <strong>✅</strong> Il costo energia EV è indipendente dal costo materia prima casa. Tutti i campi sono modificabili.
             </div>
 
-            <!-- PULSANTE EMAIL -->
             <button class="button-email" id="btnInviaEmail">📧 Richiedi offerta a info@ectenergy.co.uk</button>
         </div>
     </div>
-    <!-- FOOTER con sito web -->
     <footer>
         <div>⚙️ Costo EV separato · contratto auto senza riscatto · VAN con inflazione</div>
         <div class="footer-site">🌐 www.ego.ectenergy.co.uk</div>
@@ -591,7 +576,6 @@
 
 <script>
     (function() {
-        // Recupero input principali
         const inputCostoBolletta = document.getElementById('costoBollettaAnnuale');
         const inputKmIce = document.getElementById('kmIce');
         const inputKwp = document.getElementById('kwp');
@@ -600,7 +584,6 @@
         const inputDurata = document.getElementById('durataCanone');
         const inputKmEv = document.getElementById('kmEv');
 
-        // Recupero parametri
         const inputCostoMateriaPrima = document.getElementById('costoMateriaPrima');
         const inputCostoEnergiaEvKwh = document.getElementById('costoEnergiaEvKwh');
         const inputPercentualeBeneficio = document.getElementById('percentualeBeneficio');
@@ -611,7 +594,6 @@
         const inputValoreResiduo20 = document.getElementById('valoreResiduo20');
         const inputTassoInflazione = document.getElementById('tassoInflazione');
 
-        // Output esistenti
         const outProdSolare = document.getElementById('prodSolare');
         const outConsumoCasa = document.getElementById('consumoCasa');
         const outConsumoEv = document.getElementById('consumoEv');
@@ -635,10 +617,7 @@
         const outRisparmioCarburante = document.getElementById('risparmioCarburante');
         const notaPayback = document.getElementById('notaPayback');
 
-        // Output valore residuo in conto capitale
         const outValoreResiduoInvestimento = document.getElementById('valoreResiduoInvestimento');
-
-        // Output cash flow (nominale e VAN)
         const outCashRisparmioAnnuo = document.getElementById('cashRisparmioAnnuo');
         const outCashRisparmioTotale = document.getElementById('cashRisparmioTotale');
         const outCashInvestimento = document.getElementById('cashInvestimento');
@@ -654,7 +633,6 @@
         }
 
         function aggiornaRisultati() {
-            // Lettura input
             let costoBolletta = parseFloat(inputCostoBolletta.value) || 0;
             let kmIce = parseFloat(inputKmIce.value) || 0;
             let kwp = parseFloat(inputKwp.value) || 0;
@@ -663,7 +641,6 @@
             let durataMesi = parseInt(inputDurata.value) || 48;
             let kmEv = parseFloat(inputKmEv.value) || 0;
 
-            // Parametri
             let costoMateriaPrima = parseFloat(inputCostoMateriaPrima.value) || 0;
             let costoEnergiaEvKwh = parseFloat(inputCostoEnergiaEvKwh.value) || 0;
             let percentualeBeneficio = parseFloat(inputPercentualeBeneficio.value) || 0;
@@ -672,66 +649,47 @@
             let prodSpecifica = parseFloat(inputProdSpecifica.value) || 0;
             let costoFvPerKwp = parseFloat(inputCostoFvPerKwp.value) || 0;
             let residuo20 = parseFloat(inputValoreResiduo20.value) || 0;
-            let tassoInflazione = parseFloat(inputTassoInflazione.value) || 0; // in percentuale
+            let tassoInflazione = parseFloat(inputTassoInflazione.value) || 0;
 
-            // Calcoli energetici
             let produzioneSolare = kwp * prodSpecifica;
             let consumoEv = kmEv * consumoEvPerKm;
             let consumiCasa = (costoMateriaPrima > 0) ? (costoBolletta / costoMateriaPrima) : 0;
             let consumoTotale = consumiCasa + consumoEv;
 
-            // Costi precedenti
             let costoCarburantePre = kmIce * costoKmIce;
             let costiPrecedenti = costoBolletta + costoCarburantePre;
 
-            // Nuova bolletta con costo EV separato
             let costoEnergiaCasa = consumiCasa * costoMateriaPrima;
             let costoEnergiaEv = consumoEv * costoEnergiaEvKwh;
             let nuovaBolletta = costoEnergiaCasa + costoEnergiaEv;
 
-            // Beneficio dai pannelli (usa costoMateriaPrima)
             let beneficio = produzioneSolare * costoMateriaPrima * (percentualeBeneficio / 100);
-
-            // Costi netti e risparmio
             let costiNetto = nuovaBolletta - beneficio;
             let risparmio = costiPrecedenti - costiNetto;
 
-            // Investimento FV
             let investimentoFV = kwp * costoFvPerKwp;
-
-            // ROI e payback
             let roi = (investimentoFV > 0) ? (risparmio / investimentoFV * 100) : 0;
             let payback = (risparmio > 0) ? (investimentoFV / risparmio) : Infinity;
 
-            // Totale rate auto
             let totaleRateAuto = rataMensile * durataMesi;
-
-            // Risparmio carburante informativo
             let costoEnergiaEvSeRete = consumoEv * costoEnergiaEvKwh;
             let risparmioCarburante = costoCarburantePre - costoEnergiaEvSeRete;
-
-            // Valore residuo dopo 20 anni
             let valoreResiduo20Anni = investimentoFV * (residuo20 / 100);
 
-            // Cash flow nominale
             let risparmioAnnuale = risparmio;
             let risparmioTotale20 = risparmioAnnuale * 20;
             let flussoNettoNominale = risparmioTotale20 + valoreResiduo20Anni - investimentoFV;
 
-            // VAN attualizzato con tasso inflazione
             let tasso = tassoInflazione / 100;
             let van = 0;
             if (tasso > 0) {
-                // formula rendita
                 van = risparmioAnnuale * (1 - Math.pow(1 + tasso, -20)) / tasso;
                 van += valoreResiduo20Anni / Math.pow(1 + tasso, 20);
                 van -= investimentoFV;
             } else {
-                // tasso zero = lineare
                 van = flussoNettoNominale;
             }
 
-            // Aggiornamento campi
             outProdSolare.innerText = produzioneSolare.toFixed(0) + ' kWh';
             outConsumoCasa.innerText = consumiCasa.toFixed(0) + ' kWh';
             outConsumoEv.innerText = consumoEv.toFixed(0) + ' kWh';
@@ -758,7 +716,6 @@
             outRisparmioCarburante.innerText = formatEuro(risparmioCarburante);
 
             outValoreResiduoInvestimento.innerText = formatEuro(valoreResiduo20Anni);
-
             outCashRisparmioAnnuo.innerText = formatEuro(risparmioAnnuale);
             outCashRisparmioTotale.innerText = formatEuro(risparmioTotale20);
             outCashInvestimento.innerText = formatEuro(investimentoFV);
@@ -766,7 +723,6 @@
             outCashNettoNominale.innerText = formatEuro(flussoNettoNominale);
             outVanAttualizzato.innerText = formatEuro(van);
 
-            // Nota payback
             if (risparmio > 0 && isFinite(payback)) {
                 notaPayback.innerHTML = `<strong>✅</strong> Risparmio operativo annuo: ${formatEuro(risparmio)} · ROI ${formatPercentuale(roi)} · Payback FV: ${payback.toFixed(1)} anni. Valore residuo a 20 anni: ${formatEuro(valoreResiduo20Anni)}.`;
             } else if (risparmio <= 0) {
@@ -775,7 +731,6 @@
                 notaPayback.innerHTML = '<strong>✅</strong> Il risparmio operativo ripagherà l\'investimento FV.';
             }
 
-            // Evidenzia risparmio negativo
             if (risparmio < 0) {
                 outRisparmioOperativo.style.background = '#b02e2e';
                 outRisparmioOperativo.style.color = 'white';
@@ -785,7 +740,6 @@
             }
         }
 
-        // Event listener
         const inputs = [
             inputCostoBolletta, inputKmIce, inputKwp, inputRata, inputAnticipo, inputDurata, inputKmEv,
             inputCostoMateriaPrima, inputCostoEnergiaEvKwh, inputPercentualeBeneficio, inputCostoKmIce,
@@ -796,9 +750,7 @@
         inputDurata.addEventListener('change', aggiornaRisultati);
         window.addEventListener('load', aggiornaRisultati);
 
-        // Pulsante email
         document.getElementById('btnInviaEmail').addEventListener('click', function() {
-            // Raccogli tutti i dati correnti
             let dati = {
                 "Costo annuo bolletta (casa)": inputCostoBolletta.value + " €/anno",
                 "Percorrenza termica": inputKmIce.value + " km/anno",
@@ -817,7 +769,6 @@
                 "Costo impianto FV": inputCostoFvPerKwp.value + " €/kWp",
                 "Valore residuo FV dopo 20 anni": inputValoreResiduo20.value + " %",
                 "Tasso inflazione annuo": inputTassoInflazione.value + " %",
-                // Aggiungiamo anche alcuni risultati chiave
                 "Risparmio operativo annuo": outRisparmioOperativo.innerText,
                 "Investimento FV": outInvestimentoFV.innerText,
                 "VAN attualizzato 20 anni": outVanAttualizzato.innerText
